@@ -1,0 +1,8 @@
+.idea
+.vscode
+*.out
+*.o
+*server
+testdata
+data
+lib.c
