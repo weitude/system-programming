@@ -2,11 +2,11 @@
 
 ## Tech Stack
 
-+ pid, fork
-+ pipe / fifo
-+ dup2
-+ execl
-+ wait
+- pid, fork
+- pipe / fifo
+- dup2
+- execl
+- wait
 
 ## Description
 
@@ -42,46 +42,47 @@ typedef struct {
 
 ## battle.c
 
-+ There will be 14 battles (from A to N) in the game,
+- There will be 14 battles (from A to N) in the game,
   a battle starts whenever two players both send the first PSSM to the battle,
   so different battles may run parallelly.
 
-+ For non-root battles (B - N), it would read from its parent via stdin, and write to its parent via stdout.
+- For non-root battles (B - N), it would read from its parent via stdin, and write to its parent via stdout.
 
-+ For the root battle (A), it would print the Champion Message via stdout when the battle ends.
+- For the root battle (A), it would print the Champion Message via stdout when the battle ends.
 
-+ For battles (A - N), it would communicate with its two children via pipes.
+- For battles (A - N), it would communicate with its two children via pipes.
   Two pipes should be created for each child.
   One for writing to the child. The other for reading from the child.
   So a battle will create four pipes in total.
 
-+ Four modes in a battle’s lifecycle:
-    + Init Mode
-        + In this mode, battle creates its log file, create pipes, fork children…, etc. Then it enters Waiting Mode.
-    + Waiting Mode
-        + After the battle initializes itself, it enters Waiting Mode.
+- Four modes in a battle’s lifecycle:
+    - Init Mode
+        - In this mode, battle creates its log file, create pipes, fork children…, etc. Then it enters Waiting Mode.
+    - Waiting Mode
+        - After the battle initializes itself, it enters Waiting Mode.
           It is blocked by the pipes until it receives PSSMs from both children.
-    + Playing Mode
-        + In Playing Mode, the battle receives children’s PSSM, updates them,
+    - Playing Mode
+        - In Playing Mode, the battle receives children’s PSSM, updates them,
           then sends them back to each children repeatedly until one of the player’s HP ≤ 0.
-    + Passing Mode
-        + In Passing Mode, the battle is responsible for passing PSSM between its parent and child.
+    - Passing Mode
+        - In Passing Mode, the battle is responsible for passing PSSM between its parent and child.
           The passing mode ends when all its descendant players’ HP ≤ 0.
           After that, the battle should terminate itself immediately.
 
 ## player.c
 
-+ For each player, it should read from its parent via stdin, and write to its parent via stdout.
-+ Two types of players:
-    + Real Player (P0 - P7)
-        + It reads initial status from **player_status.txt** and join battles first.
+- For each player, it should read from its parent via stdin, and write to its parent via stdout.
+
+- Two types of players:
+    - Real Player (P0 - P7)
+        - It reads initial status from **player_status.txt** and join battles first.
           When the Real Player lose in a battle,
           it will transfer its PSSM to the corresponding Agent Player via fifo.
-    + Agent Player (P8 - P14)
-        + It waits for a PSSM via fifo in the beginning.
+    - Agent Player (P8 - P14)
+        - It waits for a PSSM via fifo in the beginning.
           After receiving loser’s PSSM from the corresponding battle, the Agent Player then works like a Real Player.
 
-## sample execution
+## Sample Execution
 
 Put the **player_status.txt**, **battle** and **player** in your current working dir.
 After that, you can run battle and player with following command:
@@ -93,3 +94,7 @@ After that, you can run battle and player with following command:
 `A = root's [battle_id]`
 
 `0 = root's [parent_pid]`
+
+## Reference
+
+[SPEC Link](https://hackmd.io/@UTGhost/H1Nk8CpMi)

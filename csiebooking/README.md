@@ -2,9 +2,9 @@
 
 ## Tech Stack
 
-+ file locking
-+ select multiplexing
-+ socket communication
+- file locking
+- select multiplexing
+- socket communication
 
 ## Description
 
@@ -91,8 +91,12 @@ You can test this program with a single command `python sample_judge.py`.
 
 `sample_judge.py` accepts following optional arguments:
 
-+ `-v`, `--verbose`: verbose. if you set this argument, `sample_judge.py` will print messages delivered between server and client, which may help debugging.
-+ `-t TASK [TASK ...]`, `--task TASK [TASK ...]`, Specify which tasks you want to run. If you didn't set this argument, `sample_judge.py` will run all tasks by default.
-  + Valid `TASK` are `["1_1", "1_2", "2", "3", "4", "5_1", "5_2"]`.
+- `-v`, `--verbose`: verbose. if you set this argument, `sample_judge.py` will print messages delivered between server and client, which may help debugging.
+- `-t TASK [TASK ...]`, `--task TASK [TASK ...]`, Specify which tasks you want to run. If you didn't set this argument, `sample_judge.py` will run all tasks by default.
+    - Valid `TASK` are `["1_1", "1_2", "2", "3", "4", "5_1", "5_2"]`.
 
 E.g, `python sample_judge.py -t 1_1 3 5_1 -v` set `sample_judge.py` to be verbose, and runs only task 1-1, task 3 and task 5-1.
+
+## Reference
+
+[SPEC Link](https://hackmd.io/@GTooth/By12six1j)

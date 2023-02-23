@@ -179,21 +179,16 @@ void p_merge_sort(int depth, int left, int right, recommend *rcmd)
     else
     {
         int mid = (left + right) / 2;
-        pid_t pid1, pid2;
-        if ((pid1 = fork()) == 0)
+        pid_t pid = fork();
+        if (!pid)
         {
             p_merge_sort(depth + 1, left, mid, rcmd);
             exit(0);
         }
-        else if ((pid2 = fork()) == 0)
-        {
-            p_merge_sort(depth + 1, mid + 1, right, rcmd);
-            exit(0);
-        }
         else
         {
-            waitpid(pid1, NULL, 0);
-            waitpid(pid2, NULL, 0);
+            waitpid(pid, NULL, 0);
+            p_merge_sort(depth + 1, mid + 1, right, rcmd);
             merge(left, mid + 1, right, rcmd);
         }
     }
