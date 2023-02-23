@@ -1,10 +1,10 @@
 # csieBooking
 
+## Tech Stack
+
 + file locking
 + select multiplexing
 + socket communication
-
----
 
 ## Description
 
