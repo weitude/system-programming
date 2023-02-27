@@ -1,6 +1,6 @@
-# NTU-SP2022
+# 2022 NTU System Programming
 
-This is my system programming homework projects.
+This is my system programming homework projects in National Taiwan University.
 
 1. csiebooking
     - file locking
